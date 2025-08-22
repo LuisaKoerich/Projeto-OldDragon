@@ -1,0 +1,108 @@
+import random
+
+def rolar_d6():
+    return random.randint(1, 6)
+
+def rolar_3d6():
+    return sum(rolar_d6() for _ in range(3))
+
+def rolar_4d6_drop_menor():
+    rolagens = [rolar_d6() for _ in range(4)]
+    return sum(rolagens) - min(rolagens)
+
+def categoria(atributo, valor):
+    if atributo == "Força (FOR)":
+        return "Fraco" if valor <= 8 else "Mediano" if valor <= 12 else "Forte" if valor <= 16 else "Muito Forte"
+    if atributo == "Destreza (DES)":
+        return "Letárgico" if valor <= 8 else "Mediano" if valor <= 12 else "Ágil" if valor <= 16 else "Preciso"
+    if atributo == "Constituição (CON)":
+        return "Frágil" if valor <= 8 else "Mediano" if valor <= 12 else "Resistente" if valor <= 16 else "Vigoroso"
+    if atributo == "Inteligência (INT)":
+        return "Inepto" if valor <= 8 else "Mediano" if valor <= 12 else "Inteligente" if valor <= 16 else "Gênio"
+    if atributo == "Sabedoria (SAB)":
+        return "Tolo" if valor <= 8 else "Mediano" if valor <= 12 else "Intuitivo" if valor <= 16 else "Presciente"
+    if atributo == "Carisma (CAR)":
+        return "Descortês" if valor <= 8 else "Mediano" if valor <= 12 else "Influente" if valor <= 16 else "Ídolo"
+
+class Atributos:
+    ATRIBUTOS = ["Força (FOR)", "Destreza (DES)", "Constituição (CON)", 
+                 "Inteligência (INT)", "Sabedoria (SAB)", "Carisma (CAR)"]
+
+    def __init__(self, nome):
+        self.nome = nome
+        self.atributos = {}  
+
+    def mostrar_significados(self):
+        print("""
+=== SIGNIFICADO DOS ATRIBUTOS ===
+Força: Fraco (3-8), Mediano (9-12), Forte (13-16), Muito Forte (17-18)
+Destreza: Letárgico (3-8), Mediano (9-12), Ágil (13-16), Preciso (17-18)
+Constituição: Frágil (3-8), Mediano (9-12), Resistente (13-16), Vigoroso (17-18)
+Inteligência: Inepto (3-8), Mediano (9-12), Inteligente (13-16), Gênio (17-18)
+Sabedoria: Tolo (3-8), Mediano (9-12), Intuitivo (13-16), Presciente (17-18)
+Carisma: Descortês (3-8), Mediano (9-12), Influente (13-16), Ídolo (17-18)
+""")
+
+    def estilo_classico(self):
+        self.atributos = dict(zip(self.ATRIBUTOS, [rolar_3d6() for _ in range(6)]))
+
+    def estilo_aventureiro(self):
+        valores = [rolar_3d6() for _ in range(6)]
+        self.atributos = self.distribuir_valores(valores)
+
+    def estilo_heroico(self):
+        valores = [rolar_4d6_drop_menor() for _ in range(6)]
+        self.atributos = self.distribuir_valores(valores)
+
+    def distribuir_valores(self, valores):
+        distribuido = {}
+        for atributo in self.ATRIBUTOS:
+            while True:
+                print("\nValores disponíveis:", valores)
+                try:
+                    escolha = int(input(f"Escolha um valor para {atributo}: "))
+                    if escolha in valores:
+                        distribuido[atributo] = escolha
+                        valores.remove(escolha)
+                        break
+                    else:
+                        print("Valor inválido! Escolha um dos números disponíveis.")
+                except ValueError:
+                    print("Digite um número válido!")
+        return distribuido
+
+    def mostrar_ficha(self):
+        print(f"\n=== FICHA DO JOGADOR: {self.nome} ===")
+        for atr, val in self.atributos.items():
+            print(f"{atr}: {val} → {categoria(atr, val)}")
+
+def menu():
+    print("\nEscolha o estilo de rolagem:")
+    print("1) Clássico  — 3d6 em ordem")
+    print("2) Aventureiro — 3d6 seis vezes; distribuir")
+    print("3) Heróico   — 4d6 descarta menor; distribuir")
+    return input("Opção (1/2/3): ").strip()
+
+def main():
+    print("=== Gerador de Atributos - Old Dragon ===")
+    nome = input("Nome do jogador: ")
+
+    personagem = Atributos(nome)
+    personagem.mostrar_significados()
+    input("\nPressione Enter para começar...")
+
+    opcao = menu()
+    if opcao == "1":
+        personagem.estilo_classico()
+    elif opcao == "2":
+        personagem.estilo_aventureiro()
+    elif opcao == "3":
+        personagem.estilo_heroico()
+    else:
+        print("Opção inválida!")
+        return
+
+    personagem.mostrar_ficha()
+
+if __name__ == "__main__":
+    main()
