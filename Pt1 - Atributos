@@ -34,7 +34,7 @@ class Atributos:
 
     def mostrar_significados(self):
         print("""
-=== SIGNIFICADO DOS ATRIBUTOS ===
+=== INFORMATIVO DOS ATRIBUTOS ===
 Força: Fraco (3-8), Mediano (9-12), Forte (13-16), Muito Forte (17-18)
 Destreza: Letárgico (3-8), Mediano (9-12), Ágil (13-16), Preciso (17-18)
 Constituição: Frágil (3-8), Mediano (9-12), Resistente (13-16), Vigoroso (17-18)
