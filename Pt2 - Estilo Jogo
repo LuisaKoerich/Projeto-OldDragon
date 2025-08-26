@@ -33,7 +33,7 @@ def _distribuir_interativo(valores):
                     valores.remove(escolha)
                     break
                 else:
-                    print("Valor inválido! Escolha um dos números mostrados.")
+                    print("Valor inválido!")
             except ValueError:
                 print("Digite um número válido!")
     return atributos
