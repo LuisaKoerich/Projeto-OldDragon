@@ -10,7 +10,7 @@ def main():
     
     while True:
     
-        print("=-=-=-=-= Criação de Personagem =-=-=-=-=")
+        print("===== Criação de Personagem =====")
         print()
         print("[1] Estilo Clássico")
         print("[2] Estilo Aventureiro")
