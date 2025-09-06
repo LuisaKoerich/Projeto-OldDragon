@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Criação de Personagem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Criação de Personagem</h1>
+    <form method="POST">
+        <label>Nome:</label>
+        <input type="text" name="nome" required><br><br>
+
+        <label>Estilo de Rolagem:</label>
+        <select name="estilo">
+            <option value="1">Clássico (3d6 em ordem)</option>
+            <option value="2">Aventureiro (3d6 distribuir)</option>
+            <option value="3">Heróico (4d6 drop menor)</option>
+        </select><br><br>
+
+        <label>Raça:</label>
+        <select name="raca">
+            <option value="humano">Humano</option>
+            <option value="elfo">Elfo</option>
+            <option value="anao">Anão</option>
+            <option value="halfling">Halfling</option>
+        </select><br><br>
+
+        <label>Classe:</label>
+        <select name="classe">
+            <option value="guerreiro">Guerreiro</option>
+            <option value="barbaro">Bárbaro</option>
+            <option value="paladino">Paladino</option>
+            <option value="clerigo">Clérigo</option>
+            <option value="druida">Druida</option>
+            <option value="academico">Acadêmico</option>
+            <option value="ladrao">Ladrão</option>
+            <option value="ranger">Ranger</option>
+            <option value="bardo">Bardo</option>
+            <option value="mago">Mago</option>
+            <option value="ilusionista">Ilusionista</option>
+            <option value="necromante">Necromante</option>
+        </select><br><br>
+
+        <button type="submit">Criar Personagem</button>
+    </form>
+</div>
+</body>
+</html>
