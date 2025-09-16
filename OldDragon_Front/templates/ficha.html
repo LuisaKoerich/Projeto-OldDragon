@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha do Personagem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Ficha do Personagem</h1>
+
+    <p><b>Nome:</b> {{ personagem.nome }}</p>
+    <p><b>Raça:</b> {{ personagem.raca }}</p>
+    <p><b>Classe:</b> {{ personagem.classe }}</p>
+
+    <h2>Atributos</h2>
+    <ul>
+        {% for attr, valor in personagem.atributos_classificados.items() %}
+            <li>{{ attr }}: {{ valor }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Habilidades da Classe</h2>
+    <ul>
+        {% for h in personagem.classe.habilidades %}
+            <li>{{ h }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Características Raciais</h2>
+    <p><b>Movimento:</b> {{ personagem.raca.movimento }}</p>
+    <p><b>Infravisão:</b> {{ personagem.raca.infravisao }}</p>
+    <p><b>Alinhamento:</b> {{ personagem.raca.alinhamento }}</p>
+    <p><b>Habilidades Raciais:</b> {{ personagem.raca.habilidades | join(', ') }}</p>
+
+    <br>
+    <a href="{{ url_for('index') }}">Voltar ao Início</a> | 
+    <a href="{{ url_for('criar') }}">Criar Novo Personagem</a>
+</body>
+</html>
