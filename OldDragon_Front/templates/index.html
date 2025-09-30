@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Old Dragon</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <header>
+        <br>
+        <h2>LUISA <br> KOERICH</h2>
+    </header>
+
+    <main>
+        <div class="dragon-container">
+            <img src="{{ url_for('static', filename='dragon.png')}}" class="dragon">
+            
+            <div class="conteudo">
+                <h1>Old Dragon</h1>
+                <p>Projeto para aula Tópicos Especiais em <br> Software - 4° Semestre Ciências da Computação.<br><br>Prof. Aryel Marlus Repula De Oliveira</p>
+                <a href="{{ url_for('criar') }}" class="btn">CRIAR PERSONAGEM</a>
+            </div>
+        </div>
+
+        <a href="https://olddragon.com.br/" class="btnOg">IR PARA O SITE DO RPG</a>
+    </main>
+</body>
+</html>

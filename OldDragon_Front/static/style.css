@@ -1,0 +1,307 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Georgia', serif;
+  background-color: #cec8a6; /* fundo bege */
+  color: #69443c; /* cor da escrita */
+  text-align: center;
+}
+
+h1 {
+  font-size: 3.5rem;
+  margin: 20px 0;
+  color: #69443c;
+}
+
+h2 {
+  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* === (index) === */
+header {
+  padding: 20px 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.dragon-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+.dragon {
+  width: 1250px;
+  height: 570px;
+  object-fit: contain; /* preserva proporção da moldura */
+}
+
+.conteudo {
+  position: absolute;
+  top: 50%; /* centralizado */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  max-width: 70%;
+}
+
+/* Botão principal */
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  background-color: #cc9e94;
+  color: #69443c;
+  border: none;
+  padding: 12px 26px;
+  margin-top: 15px;
+  border-radius: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  background-color: #d8b0a6;
+}
+
+/* Botão fixo no canto inferior esquerdo */
+.btnOg {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  text-decoration: none;
+  background-color: #cc9e94;
+  color: #69443c;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.btnOg:hover {
+  transform: scale(1.05);
+  background-color: #d8b0a6;
+}
+
+/* === PÁGINA CRIAR PERSONAGEM === */
+
+.criacao {
+  font-size: 40px;
+  margin: 20px;
+  color: #69443c;
+}
+
+form {
+  background-color: rgba(255, 255, 255, 0.8); /* fundo claro translúcido */
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: left;
+}
+
+/* Labels */
+form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+  color: #69443c;
+}
+
+/* Inputs e Selects */
+form input[type="text"],
+form select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #cc9e94;
+  border-radius: 10px;
+  background-color: #f8f6ef;
+  font-size: 1rem;
+  color: #69443c;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+form input[type="text"]:focus,
+form select:focus {
+  outline: none;
+  border-color: #69443c;
+}
+
+/* Radios */
+form input[type="radio"] {
+  margin-right: 8px;
+}
+
+form label[for^="estilo"] {
+  font-weight: normal;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+/* Botão do formulário */
+form button {
+  display: inline-block;
+  background-color: #cc9e94;
+  color: #69443c;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+form button:hover {
+  transform: scale(1.05);
+  background-color: #d8b0a6;
+}
+
+/* === PÁGINA ATRIBUTOS === */
+form {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: left;
+}
+
+form label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+  color: #69443c;
+}
+
+form select.atributo {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #cc9e94;
+  border-radius: 10px;
+  background-color: #f8f6ef;
+  font-size: 1rem;
+  color: #69443c;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+}
+
+form select.atributo:focus {
+  outline: none;
+  border-color: #69443c;
+}
+
+form button {
+  display: inline-block;
+  background-color: #cc9e94;
+  color: #69443c;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+form button:hover {
+  transform: scale(1.05);
+  background-color: #d8b0a6;
+}
+
+/* === PÁGINA FICHA DO PERSONAGEM === */
+.ficha-container {
+  background-color: rgba(255, 255, 255, 0.85);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  max-width: 700px;
+  margin: 40px auto;
+  text-align: left;
+}
+
+.ficha-container h1 {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #69443c;
+}
+
+.ficha-container h2 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #69443c;
+  border-bottom: 2px solid #cc9e94;
+  padding-bottom: 5px;
+}
+
+.ficha-container p,
+.ficha-container li {
+  font-size: 1rem;
+  margin: 5px 0;
+  color: #333;
+}
+
+.ficha-container ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.ficha-container ul li {
+  background: #f8f6ef;
+  margin: 6px 0;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #cc9e94;
+}
+
+/* Links de navegação */
+.ficha-container .links {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.ficha-container .links a {
+  text-decoration: none;
+  background-color: #cc9e94;
+  color: #69443c;
+  padding: 10px 20px;
+  border-radius: 20px;
+  margin: 0 8px;
+  font-weight: bold;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.ficha-container .links a:hover {
+  transform: scale(1.05);
+  background-color: #d8b0a6;
+}
+
+.outside-buttons {
+  text-align: center;   
+  margin: 10px 0;       
+}
+
+.outside-buttons .btn {
+  margin: 0 30px;       /* espaçamento entre os botões */
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Distribuir Atributos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <h1>Distribua seus Atributos</h1>
+    <p>Valores rolados: {{ valores|join(', ') }}</p>
+
+    <form method="POST" action="{{ url_for('distribuir_atributos') }}">
+        {% for attr in atributos %}
+            <label>{{ attr }}:</label>
+            <select name="{{ attr }}" class="atributo" required>
+                <option value="">Escolha</option>
+                {% for v in valores %}
+                    <option value="{{ v }}">{{ v }}</option>
+                {% endfor %}
+            </select><br><br>
+        {% endfor %}
+        <button type="submit">Finalizar Personagem</button>
+    </form>
+
+<script>
+    const selects = document.querySelectorAll('.atributo');
+    const valoresIniciais = [];
+
+    // Coleta os valores iniciais da primeira linha de opções
+    // para saber quantas vezes cada número existe no total.
+    Array.from(selects[0].options).forEach(opt => {
+        if (opt.value !== "") {
+            valoresIniciais.push(opt.value);
+        }
+    });
+
+    function atualizarOpcoes() {
+        const contagemSelecionados = {};
+        
+        // Conta a frequência de cada valor que já foi selecionado
+        selects.forEach(sel => {
+            if (sel.value !== "") {
+                contagemSelecionados[sel.value] = (contagemSelecionados[sel.value] || 0) + 1;
+            }
+        });
+
+        // Itera sobre cada dropdown para atualizar as opções
+        selects.forEach(sel => {
+            const valorAtual = sel.value;
+
+            Array.from(sel.options).forEach(opt => {
+                if (opt.value === "") return; // Mantém a opção "Escolha" sempre ativa
+
+                // Conta quantas vezes o valor da opção aparece na lista inicial
+                const totalDisponivel = valoresIniciais.filter(v => v === opt.value).length;
+                
+                // Conta quantas vezes o valor já foi usado
+                const jaSelecionado = contagemSelecionados[opt.value] || 0;
+
+                // A opção só pode ser desabilitada se:
+                // 1. Já foi selecionada o número máximo de vezes que ela existe
+                // 2. Não for o valor que você acabou de selecionar
+                if (jaSelecionado >= totalDisponivel && opt.value !== valorAtual) {
+                    opt.disabled = true;
+                } else {
+                    opt.disabled = false;
+                }
+            });
+        });
+    }
+
+    // Adiciona o evento para cada dropdown
+    selects.forEach(sel => {
+        sel.addEventListener('change', atualizarOpcoes);
+    });
+
+    // Garante que o estado inicial seja correto ao carregar a página
+    document.addEventListener('DOMContentLoaded', atualizarOpcoes);
+</script>
+</body>
+</html>

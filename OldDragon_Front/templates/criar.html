@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Personagem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <h1 class="criacao">Criação de Personagem</h1>
+
+    <form method="POST">
+        <label>Nome:</label><br>
+        <input type="text" name="nome" required><br><br>
+
+        <label>Raça:</label><br>
+        <select name="raca" required>
+            <option value="Humano">Humano</option>
+            <option value="Elfo">Elfo</option>
+            <option value="Anao">Anão</option>
+            <option value="Halfling">Halfling</option>
+        </select><br><br>
+
+        <label>Classe base:</label><br>
+        <select name="classe_base" id="classe_base" required onchange="atualizarEspecializacao()">
+            <option value="Guerreiro">Guerreiro</option>
+            <option value="Clerigo">Clérigo</option>
+            <option value="Ladrao">Ladrão</option>
+            <option value="Mago">Mago</option>
+        </select><br><br>
+
+        <label>Especialização:</label><br>
+        <select name="especializacao" id="especializacao" required>
+            <!-- opções serão geradas por JS -->
+        </select>
+        <br><br>
+
+        <label>Estilo de Rolagem:</label><br>
+
+        <input type="radio" id="estilo1" name="estilo" value="1" required>
+        <label for="estilo1">Clássico (3d6 em ordem)</label><br>
+
+        <input type="radio" id="estilo2" name="estilo" value="2">
+        <label for="estilo2">Aventureiro (3d6 seis vezes; distribuir)</label><br>
+
+        <input type="radio" id="estilo3" name="estilo" value="3">
+        <label for="estilo3">Heróico (4d6 descartando o menor)</label><br><br>
+
+        <button type="submit">Criar Personagem</button>
+    </form>
+
+    <script>
+        const opciones = {
+            "Guerreiro": [
+                {v: "Barbaro", t: "Bárbaro"},
+                {v: "Paladino", t: "Paladino"},
+                {v: "Nenhuma", t: "Nenhuma"}
+            ],
+            "Clerigo": [
+                {v: "Druida", t: "Druida"},
+                {v: "Academico", t: "Acadêmico"},
+                {v: "Nenhuma", t: "Nenhuma"}
+            ],
+            "Ladrao": [
+                {v: "Ranger", t: "Ranger"},
+                {v: "Bardo", t: "Bardo"},
+                {v: "Nenhuma", t: "Nenhuma"}
+            ],
+            "Mago": [
+                {v: "Ilusionista", t: "Ilusionista"},
+                {v: "Necromante", t: "Necromante"},
+                {v: "Nenhuma", t: "Nenhuma"}
+            ]
+        };
+
+        function atualizarEspecializacao(selecionado = null) {
+            const base = document.getElementById('classe_base').value;
+            const sel = document.getElementById('especializacao');
+            sel.innerHTML = ''; // limpa
+            const ops = opciones[base] || [{v: "Nenhuma", t: "Nenhuma"}];
+            ops.forEach(o => {
+                const opt = document.createElement('option');
+                opt.value = o.v;
+                opt.textContent = o.t;
+                if (o.v === selecionado) opt.selected = true; // mantém seleção anterior
+                sel.appendChild(opt);
+            });
+        }
+
+        // Inicializa o select quando a página carrega
+        window.addEventListener('DOMContentLoaded', () => {
+            atualizarEspecializacao();
+        });
+    </script>
+</body>
+</html>

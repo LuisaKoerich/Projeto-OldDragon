@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Ficha do Personagem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="ficha-container">
+        <h1>Ficha do Personagem</h1>
+
+        <p><b>Nome:</b> {{ personagem.nome }}</p>
+        <p><b>Raça:</b> {{ personagem.raca }}</p>
+        <p><b>Classe:</b> {{ personagem.classe_base }}</p>
+        <p><b>Especialização:</b> {{ personagem.especializacao }}</p>
+
+        <h2>Atributos</h2>
+        <ul>
+            {% for attr, valor in personagem.atributos_classificados.items() %}
+                <li><span class="attr-name">{{ attr }}</span>: <span class="attr-val">{{ valor }}</span></li>
+            {% endfor %}
+        </ul>
+
+        <h2>Habilidades da Classe</h2>
+        <ul>
+            {% for h in personagem.classe_base.habilidades %}
+                <li>{{ h }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Características Raciais</h2>
+        <p><b>Movimento:</b> {{ personagem.raca.movimento }}</p>
+        <p><b>Infravisão:</b> {{ personagem.raca.infravisao }}</p>
+        <p><b>Alinhamento:</b> {{ personagem.raca.alinhamento }}</p>
+        <p><b>Habilidades Raciais:</b> {{ personagem.raca.habilidades | join(', ') }}</p>
+    </div>
+
+    <div class="outside-buttons">
+        <a href="{{ url_for('index') }}" class="btn">Voltar ao Início</a>
+        <a href="{{ url_for('criar') }}" class="btn">Novo Personagem</a>
+    </div>
+</body>
+</html>
