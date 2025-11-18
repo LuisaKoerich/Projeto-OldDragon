@@ -3,6 +3,7 @@ from model.personagens import Personagem
 from model.racas import Humano, Elfo, Anao, Halfling
 from model.classes import *
 from model.estilo_jogo import classico, aventureiro, heroico, ATRIBUTOS
+import json
 import random
 
 app = Flask(__name__)
@@ -21,22 +22,24 @@ def criar():
         especializacao = request.form["especializacao"]
         estilo = request.form["estilo"]
 
-        
         session["nome"] = nome
         session["raca"] = raca_escolhida
         session["classe_base"] = classe_base
         session["especializacao"] = especializacao
 
-        if estilo == "1":  
+        # Estilo Clássico
+        if estilo == "1":
             atributos = classico()
             return finalizar_personagem(atributos)
-        else:  
-            if estilo == "2":
-                valores = [random.randint(3, 18) for _ in range(6)]
-            else:
-                valores = [sum(sorted([random.randint(1, 6) for _ in range(4)])[1:]) for _ in range(6)]
 
-            session["valores_rolados"] = valores
+        # Estilo Aventureiro ou Heróico
+        if estilo == "2":
+            valores = [random.randint(3, 18) for _ in range(6)]
+        else:
+            valores = [sum(sorted([random.randint(1, 6) for _ in range(4)])[1:]) for _ in range(6)]
+
+        session["valores_rolados"] = valores
+
         return render_template(
             "atributos.html",
             valores=valores,
@@ -49,10 +52,10 @@ def criar():
 def distribuir_atributos():
     valores = session.get("valores_rolados", [])
     atributos = {}
-    
+
     for attr in ATRIBUTOS:
         valor = int(request.form[attr])
-        
+
         if valor in valores:
             atributos[attr] = valor
         else:
@@ -66,11 +69,14 @@ def finalizar_personagem(atributos):
     classe_base = session["classe_base"]
     especializacao = session["especializacao"]
 
-   
-    racas_dict = {"Humano": Humano(), "Elfo": Elfo(), "Anao": Anao(), "Halfling": Halfling()}
+    racas_dict = {
+        "Humano": Humano(),
+        "Elfo": Elfo(),
+        "Anao": Anao(),
+        "Halfling": Halfling()
+    }
     raca = racas_dict[raca_escolhida]
 
-   
     classes_base_dict = {
         "Guerreiro": Guerreiro(),
         "Clerigo": Clerigo(),
@@ -79,7 +85,6 @@ def finalizar_personagem(atributos):
     }
     classe_base_obj = classes_base_dict[classe_base]
 
-    
     personagem = Personagem(
         nome,
         raca,
@@ -87,6 +92,26 @@ def finalizar_personagem(atributos):
         atributos,
         especializacao
     )
+
+    # ajuste json 'salvar personagem'
+    personagem_dict = {
+        "nome": personagem.nome,
+        "raca": str(personagem.raca),
+        "classe_base": str(personagem.classe_base),
+        "especializacao": personagem.especializacao,
+        "atributos": personagem.atributos,
+        "atributos_classificados": personagem.atributos_classificados,
+        "habilidades_classe": personagem.classe_base.habilidades,
+        "movimento": personagem.raca.movimento,
+        "infravisao": personagem.raca.infravisao,
+        "alinhamento": personagem.raca.alinhamento,
+        "habilidades_raca": personagem.raca.habilidades
+    }
+
+    with open("personagem.json", "w", encoding="utf-8") as f:
+        json.dump(personagem_dict, f, indent=4, ensure_ascii=False)
+
+    print(">>> Personagem salvo em personagem.json")
 
     return render_template("ficha.html", personagem=personagem)
 

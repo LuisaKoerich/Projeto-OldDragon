@@ -1,0 +1,36 @@
+{
+    "nome": "dasd",
+    "raca": "Anão",
+    "classe_base": "Ladrão",
+    "especializacao": "Bardo",
+    "atributos": {
+        "Força (FOR)": 11,
+        "Destreza (DES)": 11,
+        "Constituição (CON)": 16,
+        "Inteligência (INT)": 11,
+        "Sabedoria (SAB)": 8,
+        "Carisma (CAR)": 5
+    },
+    "atributos_classificados": {
+        "Força (FOR)": "11 (Mediano)",
+        "Destreza (DES)": "11 (Mediano)",
+        "Constituição (CON)": "16 (Resistente)",
+        "Inteligência (INT)": "11 (Mediano)",
+        "Sabedoria (SAB)": "8 (Tolo)",
+        "Carisma (CAR)": "5 (Descortês)"
+    },
+    "habilidades_classe": [
+        "Ataque Furtivo",
+        "Ouvir Ruídos",
+        "Talentos de Ladrão"
+    ],
+    "movimento": "6m",
+    "infravisao": "18m",
+    "alinhamento": "Tendem à Ordem",
+    "habilidades_raca": [
+        "Mineradores",
+        "Vigoroso",
+        "Armas grandes",
+        "Inimigos"
+    ]
+}
